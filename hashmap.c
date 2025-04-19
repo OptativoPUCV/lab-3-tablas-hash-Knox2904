@@ -38,7 +38,6 @@ int is_equal(void* key1, void* key2){
     return 0;
 }
 
-
 void insertMap(HashMap * map, char * key, void * value) {
     long hashkey = hash(key , map->capacity) ; 
 
@@ -65,7 +64,6 @@ void enlarge(HashMap * map) {
 
 }
 
-
 HashMap * createMap(long capacity) {
     HashMap* map = (HashMap*)malloc(sizeof(HashMap)) ;
     if (map == NULL) exit(EXIT_FAILURE) ; 
@@ -87,8 +85,20 @@ void eraseMap(HashMap * map,  char * key) {
 }
 
 Pair * searchMap(HashMap * map,  char * key) {   
+    long hashkey = hash(key , map->capacity) ; 
+    long inicio = hashkey ; 
+    while(map->buckets[hashkey] != NULL){
 
+        if(map->buckets[hashkey]->key != NULL && strcmp(map->buckets[hashkey]->key, key) == 0){
+            map->current = hashkey ;
+            return map->buckets[hashkey] ; 
+        }
 
+        hashkey = (hashkey + 1) % map->capacity;
+
+        if(hashkey == inicio) break; //nose si alguien revise esto pero le recomiendo lonely as a stranger de galneryus 
+    }
+        
     return NULL;
 }
 
