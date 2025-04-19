@@ -62,3 +62,14 @@ hashmap.c:67:19: error: assignment makes integer from pointer without a cast [-W
                    ^
 cc1.exe: all warnings being treated as errors
 ee0ccbb
+Sat, Apr 19, 2025  7:30:45 PM: 
+ hashmap.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+Compilation failed
+In file included from test.c:4:0:
+hashmap.c: In function 'enlarge':
+hashmap.c:67:19: error: assignment makes integer from pointer without a cast [-Werror=int-conversion]
+     map->capacity = (Pair**)calloc(map->capacity , sizeof(Pair*)) ;
+                   ^
+cc1.exe: all warnings being treated as errors
+b02b2de
