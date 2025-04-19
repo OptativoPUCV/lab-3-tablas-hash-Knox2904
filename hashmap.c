@@ -60,7 +60,19 @@ void insertMap(HashMap * map, char * key, void * value) {
 
 void enlarge(HashMap * map) {
     enlarge_called = 1; //no borrar (testing purposes)
+    long auxCapacidad = map->capacity ;
+    Pair** auxBuckets = map->buckets ; 
 
+    map->capacity *=2 ; 
+    map->capacity = calloc(map->capacity , sizeof(Pair*)) ; 
+    map->size = 0 ;
+
+    for(long i = 0 ;i< auxCapacidad ;i++){
+        if(auxBuckets[i] != NULL && auxBuckets[i]->key != NULL){
+            insertMap(map , auxBuckets[i]->key  ,auxBuckets[i]->value) ; 
+        }
+    }
+    free(auxBuckets) ; 
 
 }
 
