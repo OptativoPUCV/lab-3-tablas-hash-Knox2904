@@ -80,8 +80,20 @@ HashMap * createMap(long capacity) {
 }
 
 void eraseMap(HashMap * map,  char * key) {    
+    long hashkey = hash(key , map->capacity) ; 
+    long inicio = hashkey ; 
+    while(map->buckets[hashkey] != NULL){
 
+        if(map->buckets[hashkey]->key != NULL && strcmp(map->buckets[hashkey]->key, key) == 0){
+            map->buckets[hashkey]->key = NULL ; 
+            map->size-- ; 
+            return;
+        }
 
+        hashkey = (hashkey + 1) % map->capacity;
+
+        if(hashkey == inicio) break; 
+    }
 }
 
 Pair * searchMap(HashMap * map,  char * key) {   
